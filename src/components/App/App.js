@@ -3,6 +3,7 @@ import './App.css';
 
 // Components
 import Header from '../Header/Header'
+import MovieList from '../MovieList/MovieList'
 
 import Footer from '../Footer/Footer'
 
@@ -12,7 +13,7 @@ class App extends Component {
     return (
       <div className="App">
         <Header />
-
+        <MovieList />
         <Footer />
       </div>
     );
