@@ -1,0 +1,11 @@
+.poster-wrapper {
+    text-align: center;
+}
+.poster-wrapper img {
+    max-width: 80%;
+}
+
+.text-wrapper {
+    padding-right: 50px;
+    text-align: justify;
+}

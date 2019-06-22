@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux' 
+import { connect } from 'react-redux'
+
+// Components
+import MovieItem from '../MovieItem/MovieItem'
 
 class MovieList extends Component {
     componentDidMount() {
@@ -7,17 +10,22 @@ class MovieList extends Component {
     }
 
     getMovieList = () => {
-        this.props.dispatch({type: 'FETCH_MOVIES'});
+        this.props.dispatch({ type: 'FETCH_MOVIES' });
     }
 
     render() {
-        return (
-            <>
-                <pre>
-                    {JSON.stringify(this.props, null, 2)}
-                </pre>
-            </>
-        )
+        if (this.props.reduxState.movies[0].title === '') {
+            return <></>
+        } else {
+            return (
+                <>
+                    <pre>
+                        {/* {JSON.stringify(this.props.reduxState.movies, null, 2)} */}
+                    </pre>
+                    {this.props.reduxState.movies.map(movie => <MovieItem key={movie.id} movie={movie} />)}
+                </>
+            )
+        }
     }
 }
 

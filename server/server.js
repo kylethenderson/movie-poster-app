@@ -20,6 +20,18 @@ app.get('/api/movies', (req, res) => {
         })
 })
 
+app.put('/api/movies', (req, res) => {
+    pool.query(`UPDATE "movies" 
+	SET "title" = $1, "description" = $2
+    WHERE "id" = $3;`, [req.body.title, req.body.description, req.body.id])
+    .then( response => {
+        res.sendStatus(200);
+    })
+    .catch( error => {
+        console.log(error)
+    })
+})
+
 /** ---------- START SERVER ---------- **/
 app.listen(port, function () {
     console.log('Listening on port: ', port);

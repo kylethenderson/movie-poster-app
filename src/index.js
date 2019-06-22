@@ -18,6 +18,7 @@ const sagaMiddleware = createSagaMiddleware();
 // Create the rootSaga generator function
 function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchMovies)
+    yield takeEvery('UPDATE_MOVIE', updateMovie)
 }
 
 
@@ -25,21 +26,39 @@ function* rootSaga() {
 function* fetchMovies() {
     try {
         const movieListResponse = yield axios.get('/api/movies')
-        yield put({type: 'SET_MOVIES', payload: movieListResponse.data})
-    } catch(error) {
+        yield put({ type: 'SET_MOVIES', payload: movieListResponse.data })
+    } catch (error) {
         console.log('Error with getting movies', error)
+    }
+}
+
+function* updateMovie(action) {
+    try {
+        yield axios.put('/api/movies', action.payload)
+        yield put({type:'FETCH_MOVIES'})
+    } catch(error) {
+        console.log('Error in updating movie', error);
     }
 }
 
 
 
 // Used to store movies returned from the server
-const movies = (state = [], action) => {
+const movies = (state = [{title: ''}], action) => {
     switch (action.type) {
         case 'SET_MOVIES':
             return action.payload;
         default:
             return state;
+    }
+}
+
+const selectedMovie = (state = 0, action) => {
+    switch (action.type) {
+        case 'SELECT_MOVIE':
+            return action.payload;
+        default:
+            return state
     }
 }
 
@@ -57,6 +76,7 @@ const genres = (state = [], action) => {
 const storeInstance = createStore(
     combineReducers({
         movies,
+        selectedMovie,
         genres,
     }),
     // Add sagaMiddleware to our store
@@ -66,6 +86,6 @@ const storeInstance = createStore(
 // Pass rootSaga into our sagaMiddleware
 sagaMiddleware.run(rootSaga);
 
-ReactDOM.render(<Provider store={storeInstance}><App /></Provider>, 
+ReactDOM.render(<Provider store={storeInstance}><App /></Provider>,
     document.getElementById('root'));
 registerServiceWorker();
