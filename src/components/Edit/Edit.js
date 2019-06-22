@@ -49,20 +49,23 @@ class Edit extends Component {
             return (
                 <>
                     <Grid container justify="center" id="editWrapper">
-                        <Grid container item xs={6} justify="center" alignContent="center" spacing={24}>
+                        <Grid id="paperWrapper" container item xs={6} justify="center" alignContent="center" spacing={24}>
+                            <Grid item xs={12} >
+                                <h2>Edit Movie Details</h2>
+                            </Grid>
                             {/* <Paper id="paperWrapper"> */}
                             <Grid item xs={10}>
-                                <FormControl fullWidth margin="normal">
+                                <FormControl fullWidth margin="none">
                                     <TextField
+                                        margin="none"
                                         autoComplete="off"
                                         id="title"
                                         label="Title"
                                         value={this.state.title}
                                         onChange={this.handleChange}
-                                        margin="normal"
                                     />
                                 </FormControl>
-                                <FormControl fullWidth margin="normal">
+                                <FormControl fullWidth margin="none">
                                     <TextField
                                         autoComplete="off"
                                         id="description"
