@@ -53,10 +53,18 @@ const movies = (state = [{title: ''}], action) => {
     }
 }
 
-const selectedMovie = (state = 0, action) => {
+const selectedMovieStart = {
+    movie: {},
+    isSelected: false
+}
+
+const selectedMovie = (state = selectedMovieStart, action) => {
     switch (action.type) {
         case 'SELECT_MOVIE':
-            return action.payload;
+            return {
+                movie: action.payload,
+                isSelected: true,
+            };
         default:
             return state
     }

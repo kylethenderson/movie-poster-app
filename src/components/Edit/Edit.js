@@ -1,6 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
+import Grid from '@material-ui/core/Grid'
+// import Paper from '@material-ui/core/Paper'
+import Button from '@material-ui/core/Button'
+import TextField from '@material-ui/core/TextField'
+import FormControl from '@material-ui/core/FormControl'
+
+import './Edit.css'
 
 class Edit extends Component {
     state = {
@@ -9,10 +16,10 @@ class Edit extends Component {
     }
 
     componentDidMount() {
-        if ( this.props.reduxState.movies[0].title !== '' ) {
+        if (this.props.reduxState.movies[0].title !== '') {
             this.setState({
-                title: this.props.reduxState.movies[this.props.reduxState.selectedMovie - 1].title,
-                description: this.props.reduxState.movies[this.props.reduxState.selectedMovie - 1].description,
+                title: this.props.reduxState.selectedMovie.movie.title,
+                description: this.props.reduxState.selectedMovie.movie.description,
             })
         }
     }
@@ -26,21 +33,60 @@ class Edit extends Component {
     handleSubmit = () => {
         this.props.dispatch({
             type: 'UPDATE_MOVIE',
-            payload: {...this.state, id: this.props.reduxState.selectedMovie}
+            payload: { ...this.state, id: this.props.reduxState.selectedMovie.movie.id }
         })
         this.props.history.push('/');
     }
 
+    cancelEdit = () => {
+        return this.props.history.push('/details');
+    }
+
     render() {
-        if (this.props.reduxState.selectedMovie === 0) {
+        if (this.props.reduxState.selectedMovie.isSelected === false) {
             return <Redirect to='/' />
         } else {
             return (
                 <>
-                    {JSON.stringify(this.props.reduxState.selectedMovie, null, 2)}
-                    <input onChange={this.handleChange} id="title" value={this.state.title} />
-                    <textarea onChange={this.handleChange} id="description" value={this.state.description} />
-                    <button onClick={this.handleSubmit}>Submit</button>
+                    <Grid container justify="center" id="editWrapper">
+                        <Grid container item xs={6} justify="center" alignContent="center" spacing={24}>
+                            {/* <Paper id="paperWrapper"> */}
+                            <Grid item xs={10}>
+                                <FormControl fullWidth margin="normal">
+                                    <TextField
+                                        autoComplete="off"
+                                        id="title"
+                                        label="Title"
+                                        value={this.state.title}
+                                        onChange={this.handleChange}
+                                        margin="normal"
+                                    />
+                                </FormControl>
+                                <FormControl fullWidth margin="normal">
+                                    <TextField
+                                        autoComplete="off"
+                                        id="description"
+                                        multiline
+                                        label="Description"
+                                        value={this.state.description}
+                                        onChange={this.handleChange}
+                                        margin="normal"
+                                    />
+                                </FormControl>
+                            </Grid>
+                            <Grid item xs={4}>
+                                <Button fullWidth variant="contained" onClick={this.cancelEdit}>Cancel</Button>
+                            </Grid>
+                            <Grid item xs={4}>
+                                <Button fullWidth variant="contained" color="primary" onClick={this.handleSubmit}>Submit</Button>
+                            </Grid>
+
+                            {/* </Paper> */}
+                        </Grid>
+                    </Grid>
+                    <pre>
+                        {JSON.stringify(this.props, null, 2)}
+                    </pre>
                 </>
             )
         }

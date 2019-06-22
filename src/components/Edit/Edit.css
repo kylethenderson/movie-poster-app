@@ -1,0 +1,10 @@
+#paperWrapper {
+    width: 100%;
+    text-align: center;
+}
+#paperWrapperContents {
+    text-align: center;
+}
+textarea {
+    text-align: justify;
+}

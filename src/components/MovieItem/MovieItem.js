@@ -9,7 +9,7 @@ class MovieItem extends Component {
     setSelectedMovie = () => {
         this.props.dispatch({
             type: 'SELECT_MOVIE',
-            payload: this.props.movie.id,
+            payload: this.props.movie
         })
     }
 
