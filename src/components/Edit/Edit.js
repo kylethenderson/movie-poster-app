@@ -16,10 +16,10 @@ class Edit extends Component {
     }
 
     componentDidMount() {
-        if (this.props.reduxState.movies[0].title !== '') {
+        if (this.props.movies[0].title !== '') {
             this.setState({
-                title: this.props.reduxState.selectedMovie.movie.title,
-                description: this.props.reduxState.selectedMovie.movie.description,
+                title: this.props.movies[this.props.movieId-1].title,
+                description: this.props.movies[this.props.movieId-1].description,
             })
         }
     }
@@ -33,9 +33,9 @@ class Edit extends Component {
     handleSubmit = () => {
         this.props.dispatch({
             type: 'UPDATE_MOVIE',
-            payload: { ...this.state, id: this.props.reduxState.selectedMovie.movie.id }
+            payload: { ...this.state, id: this.props.movieId }
         })
-        this.props.history.push('/');
+        this.props.history.push('/details');
     }
 
     cancelEdit = () => {
@@ -43,7 +43,7 @@ class Edit extends Component {
     }
 
     render() {
-        if (this.props.reduxState.selectedMovie.isSelected === false) {
+        if (this.props.isSelected === false) {
             return <Redirect to='/' />
         } else {
             return (
@@ -97,7 +97,9 @@ class Edit extends Component {
 }
 
 const mapReduxStateToProps = (reduxState) => ({
-    reduxState
+    movies: reduxState.movies,
+    isSelected: reduxState.selectedMovie.isSelected,
+    movieId: reduxState.selectedMovie.movieId,
 })
 
 export default connect(mapReduxStateToProps)(Edit)

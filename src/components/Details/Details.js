@@ -7,18 +7,18 @@ import './Details.css'
 
 class DetailsView extends Component {
     render() {
-        if (this.props.selectedMovie.isSelected === false) {
+        if (this.props.isSelected === false) {
             return <Redirect to='/' />
         } else {
             return (
                 <>
                     <Grid container id="detailsContainer">
                         <Grid item xs={5} id="imageWrapper">
-                            <img alt={this.props.selectedMovie.movie.title} src={this.props.selectedMovie.movie.poster} />
+                            <img alt={this.props.movies[this.props.movieId-1].title} src={this.props.movies[this.props.movieId-1].poster} />
                         </Grid>
                         <Grid item xs={7}>
-                            <h2>{this.props.selectedMovie.movie.title}</h2>
-                            <p>{this.props.selectedMovie.movie.description}</p>
+                            <h2>{this.props.movies[this.props.movieId-1].title}</h2>
+                            <p>{this.props.movies[this.props.movieId-1].description}</p>
                             <div id="buttonWrapper">
                                 <Link to="/">
                                     <Button variant="contained" color="primary">Back to List</Button>
@@ -39,7 +39,9 @@ class DetailsView extends Component {
 }
 
 const mapReduxStateToProps = (reduxState) => ({
-    selectedMovie: reduxState.selectedMovie,
+    movies: reduxState.movies,
+    isSelected: reduxState.selectedMovie.isSelected,
+    movieId: reduxState.selectedMovie.movieId,
 })
 
 export default connect(mapReduxStateToProps)(DetailsView)

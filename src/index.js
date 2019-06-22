@@ -54,7 +54,7 @@ const movies = (state = [{title: ''}], action) => {
 }
 
 const selectedMovieStart = {
-    movie: {},
+    movieId: 1,
     isSelected: false
 }
 
@@ -62,7 +62,7 @@ const selectedMovie = (state = selectedMovieStart, action) => {
     switch (action.type) {
         case 'SELECT_MOVIE':
             return {
-                movie: action.payload,
+                movieId: action.payload,
                 isSelected: true,
             };
         default:
