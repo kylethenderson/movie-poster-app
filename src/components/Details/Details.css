@@ -14,6 +14,15 @@
     font-weight: 400;
     letter-spacing: 4px;
 }
+#detailsContainer h3 {
+    margin: 0;
+    font-weight: 400;
+    letter-spacing: 2px;
+}
+#detailsContainer ul {
+    margin-top: 5px;
+    list-style: none;
+}
  #detailsContainer p {
     margin: 25px 50px 25px 25px;
     text-align: justify;

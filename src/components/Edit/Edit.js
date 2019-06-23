@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import Grid from '@material-ui/core/Grid'
 // import Paper from '@material-ui/core/Paper'
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 import FormControl from '@material-ui/core/FormControl'
@@ -13,13 +15,34 @@ class Edit extends Component {
     state = {
         title: '',
         description: '',
+        haveGenres: false,
     }
 
     componentDidMount() {
-        if (this.props.movies[0].title !== '') {
+        console.log('EDIT PAGE MOUNTED');
+        const genreArray = this.props.genres.map(genre => {
+            return { [genre.name]: true, };
+        })
+        console.log(genreArray);
+        let genreObject = {};
+        genreArray.forEach(object => {
+            console.log(object)
+            genreObject = { ...genreObject, ...object }
+        })
+        console.log(genreObject);
+        // if (this.props.movies[0].title !== '') {
+        //     console.log('setting edit page state');
+        //     this.setState({
+        //         title: this.props.movies[this.props.movieId-1].title,
+        //         description: this.props.movies[this.props.movieId-1].description,
+        //     })
+        // }
+        if (this.props.genres[0].name !== '') {
             this.setState({
-                title: this.props.movies[this.props.movieId-1].title,
-                description: this.props.movies[this.props.movieId-1].description,
+                title: this.props.movies[this.props.movieId - 1].title,
+                description: this.props.movies[this.props.movieId - 1].description,
+                haveGenres: true,
+                genreObject: genreObject,
             })
         }
     }
@@ -30,7 +53,16 @@ class Edit extends Component {
         })
     }
 
+    updateGenres = (event) => {
+        this.setState({
+            ...this.state,
+            genreObject: {
+                ...this.state.genreObject, [event.target.id]: event.target.checked
+            }
+        })
+    }
     handleSubmit = () => {
+        console.log(this.state);
         this.props.dispatch({
             type: 'UPDATE_MOVIE',
             payload: { ...this.state, id: this.props.movieId }
@@ -48,6 +80,9 @@ class Edit extends Component {
         } else {
             return (
                 <>
+                    <pre>
+                        {JSON.stringify(this.state, null, 2)}
+                    </pre>
                     <Grid container justify="center" id="editWrapper">
                         <Grid id="paperWrapper" container item xs={6} justify="center" alignContent="center" spacing={24}>
                             <Grid item xs={12} >
@@ -77,6 +112,33 @@ class Edit extends Component {
                                     />
                                 </FormControl>
                             </Grid>
+                            <Grid item xs={12}>
+                                <h4>Remove Tagged Genres</h4>
+                                {this.state.haveGenres ?
+                                    <>
+                                        {this.props.genres.map(genre => 
+                                            <FormControlLabel
+                                                key={genre.name}
+                                                control={
+                                                    <Checkbox 
+                                                        checked={this.state.genreObject[genre.name]} 
+                                                        onChange={this.updateGenres} 
+                                                        value={genre.name}
+                                                        id={genre.name} 
+                                                        key={genre.name} 
+                                                    />
+                                                        
+                                                }
+                                                label={genre.name}
+                                            />
+                                            
+                                        )}
+                                    </>
+                                    :
+                                    <></>
+                                }
+                            </Grid>
+
                             <Grid item xs={4}>
                                 <Button fullWidth variant="contained" onClick={this.cancelEdit}>Cancel</Button>
                             </Grid>
@@ -88,7 +150,7 @@ class Edit extends Component {
                         </Grid>
                     </Grid>
                     <pre>
-                        {JSON.stringify(this.props, null, 2)}
+                        {JSON.stringify(this.props.genres, null, 2)}
                     </pre>
                 </>
             )
@@ -100,6 +162,7 @@ const mapReduxStateToProps = (reduxState) => ({
     movies: reduxState.movies,
     isSelected: reduxState.selectedMovie.isSelected,
     movieId: reduxState.selectedMovie.movieId,
+    genres: reduxState.genres,
 })
 
 export default connect(mapReduxStateToProps)(Edit)

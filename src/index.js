@@ -19,6 +19,8 @@ const sagaMiddleware = createSagaMiddleware();
 function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchMovies)
     yield takeEvery('UPDATE_MOVIE', updateMovie)
+    yield takeEvery('SELECT_MOVIE', selectMovie)
+    yield takeEvery('DELETE_GENRES', deleteGenres)
 }
 
 
@@ -35,16 +37,45 @@ function* fetchMovies() {
 function* updateMovie(action) {
     try {
         yield axios.put('/api/movies', action.payload)
-        yield put({type:'FETCH_MOVIES'})
-    } catch(error) {
+        yield put({ type: 'DELETE_GENRES', payload: action.payload })
+        yield put({ type: 'FETCH_MOVIES' })
+        yield put({ type: 'SELECT_MOVIE', payload: action.payload.id})
+    } catch (error) {
         console.log('Error in updating movie', error);
+    }
+}
+
+// setting the single selected movie - action.payload takes an id
+function* selectMovie(action) {
+    yield put({ type: 'SET_MOVIE', payload: action.payload })
+    yield put({ type: 'CLEAR_TAGS' });
+    const movieTags = yield axios.get(`/api/tags?id=${action.payload}`)
+    yield put({ type: 'SET_TAGS', payload: movieTags.data })
+}
+
+function* deleteGenres(action) {
+    console.log(action.payload)
+    for (let genre in action.payload.genreObject) {
+        console.log('inside the for...in loop', genre)
+        if (action.payload.genreObject.hasOwnProperty(genre)) {
+            if (!action.payload.genreObject[genre]) {
+                try {
+                    const movieGenreId = yield axios.get(`/api/genres/delete?genre=${genre}&id=${action.payload.id}`)
+                    yield axios.delete(`/api/genres/${movieGenreId.data[0].id}`)
+                    console.log(movieGenreId.data[0].id)
+                }
+                catch (error) {
+                    console.log('Error in deleting genre from index', error);
+                }
+            }
+        }
     }
 }
 
 
 
 // Used to store movies returned from the server
-const movies = (state = [{title: ''}], action) => {
+const movies = (state = [{ title: '' }], action) => {
     switch (action.type) {
         case 'SET_MOVIES':
             return action.payload;
@@ -60,7 +91,7 @@ const selectedMovieStart = {
 
 const selectedMovie = (state = selectedMovieStart, action) => {
     switch (action.type) {
-        case 'SELECT_MOVIE':
+        case 'SET_MOVIE':
             return {
                 movieId: action.payload,
                 isSelected: true,
@@ -71,10 +102,12 @@ const selectedMovie = (state = selectedMovieStart, action) => {
 }
 
 // Used to store the movie genres
-const genres = (state = [], action) => {
+const genres = (state = [{ name: '' }], action) => {
     switch (action.type) {
         case 'SET_TAGS':
             return action.payload;
+        case 'CLEAR_TAGS':
+            return [];
         default:
             return state;
     }

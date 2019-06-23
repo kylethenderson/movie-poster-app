@@ -5,6 +5,9 @@ import Button from '@material-ui/core/Button'
 import { Link, Redirect } from 'react-router-dom'
 import './Details.css'
 
+// Components
+import GenreItem from '../GenreItem/GenreItem'
+
 class DetailsView extends Component {
     render() {
         if (this.props.isSelected === false) {
@@ -14,11 +17,15 @@ class DetailsView extends Component {
                 <>
                     <Grid container id="detailsContainer">
                         <Grid item xs={5} id="imageWrapper">
-                            <img alt={this.props.movies[this.props.movieId-1].title} src={this.props.movies[this.props.movieId-1].poster} />
+                            <img alt={this.props.movies[this.props.movieId - 1].title} src={this.props.movies[this.props.movieId - 1].poster} />
                         </Grid>
                         <Grid item xs={7}>
-                            <h2>{this.props.movies[this.props.movieId-1].title}</h2>
-                            <p>{this.props.movies[this.props.movieId-1].description}</p>
+                            <h2>{this.props.movies[this.props.movieId - 1].title}</h2>
+                            <p>{this.props.movies[this.props.movieId - 1].description}</p>
+                            <h3>Genres</h3>
+                            <ul>
+                                {this.props.genres.map(genre => <GenreItem key={genre.name} genre={genre} />)}
+                            </ul>
                             <div id="buttonWrapper">
                                 <Link to="/">
                                     <Button variant="contained" color="primary">Back to List</Button>
@@ -29,9 +36,9 @@ class DetailsView extends Component {
                             </div>
                         </Grid>
                     </Grid>
-                    {/* <pre>
-                        {JSON.stringify(this.props.selectedMovie.movie, null, 2)}
-                    </pre> */}
+                    <pre>
+                        {JSON.stringify(this.props.genres, null, 2)}
+                    </pre>
                 </>
             )
         }
@@ -42,6 +49,7 @@ const mapReduxStateToProps = (reduxState) => ({
     movies: reduxState.movies,
     isSelected: reduxState.selectedMovie.isSelected,
     movieId: reduxState.selectedMovie.movieId,
+    genres: reduxState.genres,
 })
 
 export default connect(mapReduxStateToProps)(DetailsView)
