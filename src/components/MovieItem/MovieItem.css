@@ -1,11 +1,12 @@
-.poster-wrapper {
+#movieItemWrapper {
+    padding: 15px 0px;
+}
+.text-center{
     text-align: center;
 }
-.poster-wrapper img {
-    max-width: 80%;
+#movieItemWrapper h2 {
+    margin: 5px 0px;
 }
-
-.text-wrapper {
-    padding-right: 50px;
-    text-align: justify;
+#movieItemWrapper button {
+    margin: 10px 0px;
 }

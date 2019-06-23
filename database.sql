@@ -42,3 +42,34 @@ VALUES
 ('Science Fiction'),
 ('Space-Opera'),
 ('Superhero');
+
+
+
+
+
+SELECT * FROM "movies" ORDER BY "id";
+
+UPDATE "movies" 
+	SET "title" = 'Avatar2', "description" = 'Something new.'
+	WHERE "id" = 1;
+	
+	
+INSERT INTO "movies_genres" ("movie_id", "genre_id") VALUES
+(1, 1), (1, 2), (1, 8), (2, 8), (2, 2), (1,7), 
+(3,13), (4,2), (4,4), (5,6), (6,1), (6,7), (6,8), 
+(7,1), (7,6), (8,2), (8,7), (9,2), (9,4), (9,8),
+(10, 7), (10,8), (10, 11), (10,12), (11,11), (12,3),
+(13,3), (13,7), (13,10), (14,1), (14,2);
+
+INSERT INTO "movies_genres" ("movie_id", "genre_id") VALUES
+(1, 1), (1, 8);
+
+
+
+SELECT "movies_genres"."id", "movies"."id", "movies"."title", "genres"."name" FROM
+"movies" JOIN "movies_genres"
+	ON "movies"."id" = "movies_genres"."movie_id"
+JOIN "genres"
+	ON "movies_genres"."genre_id" = "genres"."id"
+	WHERE "genres"."name" = 'Adventure' AND "movies"."id" = '1';
+

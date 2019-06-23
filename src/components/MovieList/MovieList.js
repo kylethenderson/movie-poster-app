@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import Grid from '@material-ui/core/Grid'
 
 // Components
 import MovieItem from '../MovieItem/MovieItem'
@@ -18,9 +19,9 @@ class MovieList extends Component {
             return <></>
         } else {
             return (
-                <div className="movie-list-wrapper">
+                <Grid container className="movie-list-wrapper">
                     {this.props.reduxState.movies.map(movie => <MovieItem key={movie.id} movie={movie} />)}
-                </div>
+                </Grid>
             )
         }
     }
