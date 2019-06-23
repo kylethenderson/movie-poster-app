@@ -18,6 +18,14 @@
     margin-bottom: 75px;
     box-shadow: 5px 5px 10px -4px rgba(34, 34, 34, .5);
 }
+#editWrapper h4 {
+    text-align: center;
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    margin: 10px 0px 0px 0px;
+    padding: 3px 5px;
+}
 textarea {
     text-align: justify;
 }

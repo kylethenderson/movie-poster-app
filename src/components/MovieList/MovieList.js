@@ -18,12 +18,9 @@ class MovieList extends Component {
             return <></>
         } else {
             return (
-                <>
-                    <pre>
-                        {/* {JSON.stringify(this.props.reduxState.movies, null, 2)} */}
-                    </pre>
+                <div className="movie-list-wrapper">
                     {this.props.reduxState.movies.map(movie => <MovieItem key={movie.id} movie={movie} />)}
-                </>
+                </div>
             )
         }
     }

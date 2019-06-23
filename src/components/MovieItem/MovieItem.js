@@ -27,7 +27,6 @@ class MovieItem extends Component {
                             <Button variant="contained" onClick={this.setSelectedMovie} color="primary" >Details</Button>
                         </Link>
                     </Grid>
-                    {/* {JSON.stringify(this.props.movie.title, null, 2)} */}
                 </Grid>
             </>
         )

@@ -24,7 +24,7 @@ function* rootSaga() {
 }
 
 
-
+// generator function to get all the movies from the db
 function* fetchMovies() {
     try {
         const movieListResponse = yield axios.get('/api/movies')
@@ -34,6 +34,8 @@ function* fetchMovies() {
     }
 }
 
+// generator function to update title and description 
+// in the db. action.payload is an object from edit.js local state
 function* updateMovie(action) {
     try {
         yield axios.put('/api/movies', action.payload)
@@ -45,7 +47,7 @@ function* updateMovie(action) {
     }
 }
 
-// setting the single selected movie - action.payload takes an id
+// setting the single selected movie - action.payload takes a single id
 function* selectMovie(action) {
     yield put({ type: 'SET_MOVIE', payload: action.payload })
     yield put({ type: 'CLEAR_TAGS' });
@@ -53,16 +55,20 @@ function* selectMovie(action) {
     yield put({ type: 'SET_TAGS', payload: movieTags.data })
 }
 
+// generator function to delete a genre from the movies_genres table
+// action.payload is the object from the updateMovie generator function
 function* deleteGenres(action) {
-    console.log(action.payload)
+    // console.log(action.payload)
+    // loop through all the keys in the genres object from action.payload
     for (let genre in action.payload.genreObject) {
-        console.log('inside the for...in loop', genre)
+        // if the genreObject has the key in the for...in loop
         if (action.payload.genreObject.hasOwnProperty(genre)) {
+            // if the key in the genreObject is false, we want to delete it from the movies_genres table
             if (!action.payload.genreObject[genre]) {
                 try {
+                    // get the id from the movies_genres table based on genre name and movie id
                     const movieGenreId = yield axios.get(`/api/genres/delete?genre=${genre}&id=${action.payload.id}`)
                     yield axios.delete(`/api/genres/${movieGenreId.data[0].id}`)
-                    console.log(movieGenreId.data[0].id)
                 }
                 catch (error) {
                     console.log('Error in deleting genre from index', error);
@@ -72,9 +78,9 @@ function* deleteGenres(action) {
     }
 }
 
+// REDUCERS
 
-
-// Used to store movies returned from the server
+// reducer to store movies array returned from the server
 const movies = (state = [{ title: '' }], action) => {
     switch (action.type) {
         case 'SET_MOVIES':
@@ -89,6 +95,7 @@ const selectedMovieStart = {
     isSelected: false
 }
 
+// reducer to store the single movie that is clicked from the movie list page
 const selectedMovie = (state = selectedMovieStart, action) => {
     switch (action.type) {
         case 'SET_MOVIE':
@@ -101,7 +108,7 @@ const selectedMovie = (state = selectedMovieStart, action) => {
     }
 }
 
-// Used to store the movie genres
+// reducer to store the movie genres
 const genres = (state = [{ name: '' }], action) => {
     switch (action.type) {
         case 'SET_TAGS':

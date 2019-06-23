@@ -80,9 +80,6 @@ class Edit extends Component {
         } else {
             return (
                 <>
-                    <pre>
-                        {JSON.stringify(this.state, null, 2)}
-                    </pre>
                     <Grid container justify="center" id="editWrapper">
                         <Grid id="paperWrapper" container item xs={6} justify="center" alignContent="center" spacing={24}>
                             <Grid item xs={12} >
@@ -149,9 +146,6 @@ class Edit extends Component {
                             {/* </Paper> */}
                         </Grid>
                     </Grid>
-                    <pre>
-                        {JSON.stringify(this.props.genres, null, 2)}
-                    </pre>
                 </>
             )
         }

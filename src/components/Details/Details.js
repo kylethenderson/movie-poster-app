@@ -36,9 +36,6 @@ class DetailsView extends Component {
                             </div>
                         </Grid>
                     </Grid>
-                    <pre>
-                        {JSON.stringify(this.props.genres, null, 2)}
-                    </pre>
                 </>
             )
         }
