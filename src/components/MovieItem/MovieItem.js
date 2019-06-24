@@ -7,6 +7,9 @@ import Button from '@material-ui/core/Button'
 import { Link } from 'react-router-dom'
 
 class MovieItem extends Component {
+
+    // on click of the button, dispatch the id to the
+    // reducer to hold the id for use later
     setSelectedMovie = () => {
         this.props.dispatch({
             type: 'SELECT_MOVIE',

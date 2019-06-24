@@ -6,10 +6,13 @@ import Grid from '@material-ui/core/Grid'
 import MovieItem from '../MovieItem/MovieItem'
 
 class MovieList extends Component {
+
+    // on mount, run getMovieList
     componentDidMount() {
         this.getMovieList();
     }
 
+    // dispatch action to fetch all movies
     getMovieList = () => {
         this.props.dispatch({ type: 'FETCH_MOVIES' });
     }

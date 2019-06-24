@@ -91,7 +91,6 @@ class Edit extends Component {
                             <Grid item xs={12} >
                                 <h2>Edit Movie Details</h2>
                             </Grid>
-                            {/* <Paper id="paperWrapper"> */}
                             <Grid item xs={10}>
                                 <FormControl fullWidth margin="none">
                                     <TextField
@@ -145,15 +144,12 @@ class Edit extends Component {
                                 :
                                 <></>
                             }
-
                             <Grid item xs={4}>
                                 <Button fullWidth variant="contained" onClick={this.cancelEdit}>Cancel</Button>
                             </Grid>
                             <Grid item xs={4}>
                                 <Button fullWidth variant="contained" color="primary" onClick={this.handleSubmit}>Submit</Button>
                             </Grid>
-
-                            {/* </Paper> */}
                         </Grid>
                     </Grid>
                 </>
