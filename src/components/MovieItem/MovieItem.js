@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './MovieItem.css';
+import Card from '@material-ui/core/Card'
+import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button'
@@ -21,18 +23,17 @@ class MovieItem extends Component {
         return (
             <>
                 <Grid id="movieItemWrapper" container item xs={3} justify="center">
-                    <Grid item xs={12} className="text-center">
-                        <img alt={this.props.movie.title} src={this.props.movie.poster} />
-                    </Grid>
-                    <Grid item xs={9} className="text-center" zeroMinWidth>
-                        <h2>{this.props.movie.title}</h2>
-                        <Typography noWrap>{this.props.movie.description}</Typography>
-                    </Grid>
-                    <Grid item xs={9} className="text-center">
+                    <Card elevation={5} className="text-center my-10">
+                        <CardContent>
+                            <img alt={this.props.movie.title} src={this.props.movie.poster} />
+                            <h2 className="text-center">{this.props.movie.title}</h2>
+                            <Typography variant="subtitle1">Description:</Typography>
+                            <Typography noWrap>{this.props.movie.description}</Typography>
+                        </CardContent>
                         <Link to="/details">
                             <Button variant="contained" onClick={this.setSelectedMovie} color="primary" >Details</Button>
                         </Link>
-                    </Grid>
+                    </Card>
                 </Grid>
             </>
         )

@@ -1,13 +1,22 @@
 #movieItemWrapper {
     padding: 15px 0px;
 }
+#movieItemWrapper img {
+    width: 100%;
+}
+
 .text-center{
     text-align: center;
+}
+.my-10 {
+    margin: 0px 10px !important;
 }
 #movieItemWrapper h2 {
     margin: 5px 0px;
     padding-top: 10px;
     min-height: 75px;
+    font-weight: 400;
+    letter-spacing: 1px;
 }
 #movieItemWrapper button {
     margin: 10px 0px;
