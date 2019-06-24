@@ -80,7 +80,7 @@ class Login extends Component {
                                 }
                             </Grid>
                         </Grid>
-                        <p id="loginAsterisk">*not a real login form. just enter anything.</p>
+                        <p id="loginAsterisk">*not a secure form. still needs correct info tho</p>
                     </Card>
                 </Grid>
             </Grid>
