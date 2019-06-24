@@ -14,3 +14,38 @@ a {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+.login-input {
+  width: 50%;
+}
+#mainCard {
+  margin: 50px 0px;
+  padding: 25px 0px;
+  min-height: 25vh;
+  text-align: center;
+}
+#mainCard h2 {
+  font-weight: 300;
+  font-size: 36px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin: 15px 25px;
+}
+#mainCard h3 {
+  font-weight: 300;
+  letter-spacing: 2px;
+  margin: 0px 20px 15px 20px;
+}
+#mainCard button {
+  margin: 25px 10px 0px 10px;
+  letter-spacing: 2px;
+}
+#mainCard textarea {
+  font-size: 14px;
+  letter-spacing: 1px;
+  padding: 5px;
+}
+#loginAsterisk {
+  font-size: 10px;
+  text-transform: uppercase;
+  margin-top: 25px;
+}

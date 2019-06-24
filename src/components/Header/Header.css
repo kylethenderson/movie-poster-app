@@ -11,3 +11,13 @@ header h1 {
     font-weight: 300;
     letter-spacing: 5px;
 }
+#loginButton {
+    position: absolute !important;
+    top: 25px;
+    right: 100px;
+}
+#homeButton {
+    position: absolute !important;
+    top: 25px;
+    right: 15px;
+}
