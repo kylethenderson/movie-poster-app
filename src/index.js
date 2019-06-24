@@ -11,6 +11,7 @@ import logger from 'redux-logger';
 import createSagaMiddleware from 'redux-saga';
 import axios from 'axios';
 import { put, takeEvery } from 'redux-saga/effects'
+import Reducers from './reducers/reducers'
 
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
@@ -78,55 +79,11 @@ function* deleteGenres(action) {
     }
 }
 
-// REDUCERS
 
-// reducer to store movies array returned from the server
-const movies = (state = [{ title: '' }], action) => {
-    switch (action.type) {
-        case 'SET_MOVIES':
-            return action.payload;
-        default:
-            return state;
-    }
-}
-
-const selectedMovieStart = {
-    movieId: 1,
-    isSelected: false
-}
-
-// reducer to store the single movie that is clicked from the movie list page
-const selectedMovie = (state = selectedMovieStart, action) => {
-    switch (action.type) {
-        case 'SET_MOVIE':
-            return {
-                movieId: action.payload,
-                isSelected: true,
-            };
-        default:
-            return state
-    }
-}
-
-// reducer to store the movie genres
-const genres = (state = [], action) => {
-    switch (action.type) {
-        case 'SET_TAGS':
-            return action.payload;
-        case 'CLEAR_TAGS':
-            return [];
-        default:
-            return state;
-    }
-}
 
 // Create one store that all components can use
 const storeInstance = createStore(
-    combineReducers({
-        movies,
-        selectedMovie,
-        genres,
-    }),
+    combineReducers(Reducers),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),
 );
