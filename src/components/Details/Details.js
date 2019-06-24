@@ -15,11 +15,11 @@ class DetailsView extends Component {
             return <Redirect to='/' />
         } else {
             return (
-                <Grid container id="detailsContainer">
-                    <Grid item xs={5} id="imageWrapper">
+                <Grid container id="detailsContainer" justify="center">
+                    <Grid item xs={4} id="imageWrapper">
                         <img alt={this.props.movies[this.props.movieId - 1].title} src={this.props.movies[this.props.movieId - 1].poster} />
                     </Grid>
-                    <Grid item xs={7}>
+                    <Grid item xs={6}>
                         <h2>{this.props.movies[this.props.movieId - 1].title}</h2>
                         <p>{this.props.movies[this.props.movieId - 1].description}</p>
                         <h3>Genres</h3>
