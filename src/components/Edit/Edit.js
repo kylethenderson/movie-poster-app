@@ -85,74 +85,72 @@ class Edit extends Component {
             return <Redirect to='/' />
         } else {
             return (
-                <>
-                    <Grid container justify="center" id="editWrapper">
-                        <Grid id="paperWrapper" container item xs={6} justify="center" alignContent="center" spacing={24}>
-                            <Grid item xs={12} >
-                                <h2>Edit Movie Details</h2>
-                            </Grid>
-                            <Grid item xs={10}>
-                                <FormControl fullWidth margin="none">
-                                    <TextField
-                                        margin="none"
-                                        autoComplete="off"
-                                        id="title"
-                                        label="Title"
-                                        value={this.state.title}
-                                        onChange={this.handleChange}
-                                    />
-                                </FormControl>
-                                <FormControl fullWidth margin="none">
-                                    <TextField
-                                        autoComplete="off"
-                                        id="description"
-                                        multiline
-                                        label="Description"
-                                        value={this.state.description}
-                                        onChange={this.handleChange}
-                                        margin="normal"
-                                    />
-                                </FormControl>
-                            </Grid>
-                            {this.props.genres[0] ?
-                                <Grid item xs={12}>
-                                    <h4>Remove Tagged Genres</h4>
-                                    {this.state.haveGenres ?
-                                        <>
-                                            {this.props.genres.map(genre =>
-                                                <FormControlLabel
-                                                    key={genre.name}
-                                                    control={
-                                                        <Checkbox
-                                                            checked={this.state.genreObject[genre.name]}
-                                                            onChange={this.updateGenres}
-                                                            value={genre.name}
-                                                            id={genre.name}
-                                                            key={genre.name}
-                                                        />
+                <Grid container justify="center" id="editWrapper">
+                    <Grid id="paperWrapper" container item xs={6} justify="center" alignContent="center" spacing={24}>
+                        <Grid item xs={12} >
+                            <h2>Edit Movie Details</h2>
+                        </Grid>
+                        <Grid item xs={10}>
+                            <FormControl fullWidth margin="none">
+                                <TextField
+                                    margin="none"
+                                    autoComplete="off"
+                                    id="title"
+                                    label="Title"
+                                    value={this.state.title}
+                                    onChange={this.handleChange}
+                                />
+                            </FormControl>
+                            <FormControl fullWidth margin="none">
+                                <TextField
+                                    autoComplete="off"
+                                    id="description"
+                                    multiline
+                                    label="Description"
+                                    value={this.state.description}
+                                    onChange={this.handleChange}
+                                    margin="normal"
+                                />
+                            </FormControl>
+                        </Grid>
+                        {this.props.genres[0] ?
+                            <Grid item xs={12}>
+                                <h4>Remove Tagged Genres</h4>
+                                {this.state.haveGenres ?
+                                    <>
+                                        {this.props.genres.map(genre =>
+                                            <FormControlLabel
+                                                key={genre.name}
+                                                control={
+                                                    <Checkbox
+                                                        checked={this.state.genreObject[genre.name]}
+                                                        onChange={this.updateGenres}
+                                                        value={genre.name}
+                                                        id={genre.name}
+                                                        key={genre.name}
+                                                    />
 
-                                                    }
-                                                    label={genre.name}
-                                                />
+                                                }
+                                                label={genre.name}
+                                            />
 
-                                            )}
-                                        </>
-                                        :
-                                        <></>
-                                    }
-                                </Grid>
-                                :
-                                <></>
-                            }
-                            <Grid item xs={4}>
-                                <Button fullWidth variant="contained" onClick={this.cancelEdit}>Cancel</Button>
+                                        )}
+                                    </>
+                                    :
+                                    <></>
+                                }
                             </Grid>
-                            <Grid item xs={4}>
-                                <Button fullWidth variant="contained" color="primary" onClick={this.handleSubmit}>Submit</Button>
-                            </Grid>
+                            :
+                            <></>
+                        }
+                        <Grid item xs={4}>
+                            <Button fullWidth variant="contained" onClick={this.cancelEdit}>Cancel</Button>
+                        </Grid>
+                        <Grid item xs={4}>
+                            <Button fullWidth variant="contained" color="primary" onClick={this.handleSubmit}>Submit</Button>
                         </Grid>
                     </Grid>
-                </>
+                </Grid>
             )
         }
     }

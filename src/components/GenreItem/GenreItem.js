@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
 
 class GenreItem extends Component {
-    render () {
+    render() {
         return (
-            <>
-                <li>{this.props.genre.name}</li>
-            </>
+            <li>{this.props.genre.name}</li>
         )
     }
 }

@@ -21,21 +21,19 @@ class MovieItem extends Component {
 
     render() {
         return (
-            <>
-                <Grid id="movieItemWrapper" container item xs={3} justify="center">
-                    <Card elevation={5} className="text-center my-10">
-                        <CardContent>
-                            <img alt={this.props.movie.title} src={this.props.movie.poster} />
-                            <h2 className="text-center">{this.props.movie.title}</h2>
-                            <Typography variant="subtitle1">Description:</Typography>
-                            <Typography noWrap>{this.props.movie.description}</Typography>
-                        </CardContent>
-                        <Link to="/details">
-                            <Button variant="contained" onClick={this.setSelectedMovie} color="primary" >Details</Button>
-                        </Link>
-                    </Card>
-                </Grid>
-            </>
+            <Grid id="movieItemWrapper" container item xs={3} justify="center">
+                <Card elevation={5} className="text-center my-10">
+                    <CardContent>
+                        <img alt={this.props.movie.title} src={this.props.movie.poster} />
+                        <h2 className="text-center">{this.props.movie.title}</h2>
+                        <Typography variant="subtitle1">Description:</Typography>
+                        <Typography noWrap>{this.props.movie.description}</Typography>
+                    </CardContent>
+                    <Link to="/details">
+                        <Button variant="contained" onClick={this.setSelectedMovie} color="primary" >Details</Button>
+                    </Link>
+                </Card>
+            </Grid>
         )
     }
 }

@@ -15,29 +15,27 @@ class DetailsView extends Component {
             return <Redirect to='/' />
         } else {
             return (
-                <>
-                    <Grid container id="detailsContainer">
-                        <Grid item xs={5} id="imageWrapper">
-                            <img alt={this.props.movies[this.props.movieId - 1].title} src={this.props.movies[this.props.movieId - 1].poster} />
-                        </Grid>
-                        <Grid item xs={7}>
-                            <h2>{this.props.movies[this.props.movieId - 1].title}</h2>
-                            <p>{this.props.movies[this.props.movieId - 1].description}</p>
-                            <h3>Genres</h3>
-                            <ul>
-                                {this.props.genres.map(genre => <GenreItem key={genre.name} genre={genre} />)}
-                            </ul>
-                            <div id="buttonWrapper">
-                                <Link to="/">
-                                    <Button variant="contained" color="primary">Back to List</Button>
-                                </Link>
-                                <Link to="/edit">
-                                    <Button variant="contained" color="primary">Edit</Button>
-                                </Link>
-                            </div>
-                        </Grid>
+                <Grid container id="detailsContainer">
+                    <Grid item xs={5} id="imageWrapper">
+                        <img alt={this.props.movies[this.props.movieId - 1].title} src={this.props.movies[this.props.movieId - 1].poster} />
                     </Grid>
-                </>
+                    <Grid item xs={7}>
+                        <h2>{this.props.movies[this.props.movieId - 1].title}</h2>
+                        <p>{this.props.movies[this.props.movieId - 1].description}</p>
+                        <h3>Genres</h3>
+                        <ul>
+                            {this.props.genres.map(genre => <GenreItem key={genre.name} genre={genre} />)}
+                        </ul>
+                        <div id="buttonWrapper">
+                            <Link to="/">
+                                <Button variant="contained" color="primary">Back to List</Button>
+                            </Link>
+                            <Link to="/edit">
+                                <Button variant="contained" color="primary">Edit</Button>
+                            </Link>
+                        </div>
+                    </Grid>
+                </Grid>
             )
         }
     }
