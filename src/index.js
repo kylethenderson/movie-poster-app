@@ -23,7 +23,7 @@ const sagaMiddleware = createSagaMiddleware();
 const storeInstance = createStore(
     combineReducers(Reducers),
     // Add sagaMiddleware to our store
-    applyMiddleware(sagaMiddleware),
+    applyMiddleware(sagaMiddleware, logger),
 );
 
 // Pass rootSaga into our sagaMiddleware
