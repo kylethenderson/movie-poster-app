@@ -14,27 +14,27 @@ class Login extends Component {
 
     // on click of login, make sure credentials state in redux aren't empty, then set login to true and redirect to admin page
     handleLogin = () => {
-        if (this.state.username !== '' && this.state.password !== '') {
+        if (this.state.username === 'camera' && this.state.password === 'action') {
             this.props.dispatch({
-                type: 'LOG_IN'
+                type: 'LOG_IN',
             })
+            this.props.history.push('/admin')
             // clear stored input once the "logged in" state is set to true
             this.setState({
                 username: '',
                 password: ''
             })
-            this.props.history.push('/admin')
         } else {
             // otherwise, alert the user to enter user and pass
-            alert('Please enter Username and Password');
+            alert('Please enter correct Username and Password');
         }
     }
 
     // set the credentials state in the redux store when user enters username or password
     handleChange = (event) => {
-        this.setState({ 
-            ...this.state, 
-            [event.target.id]: event.target.value 
+        this.setState({
+            ...this.state,
+            [event.target.id]: event.target.value
         })
     }
 
