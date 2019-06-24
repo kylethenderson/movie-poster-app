@@ -38,7 +38,7 @@ function* updateMovie(action) {
 function* selectMovie(action) {
     yield put({ type: 'SET_MOVIE', payload: action.payload })
     yield put({ type: 'CLEAR_TAGS' });
-    const movieTags = yield axios.get(`/api/tags?id=${action.payload}`)
+    const movieTags = yield axios.get(`/api/genres?id=${action.payload}`)
     yield put({ type: 'SET_TAGS', payload: movieTags.data })
 }
 
