@@ -9,13 +9,12 @@ import { Provider } from 'react-redux';
 import logger from 'redux-logger';
 // Import saga middleware
 import createSagaMiddleware from 'redux-saga';
+// import reducers and sagas
 import Reducers from './reducers/reducers'
-import Sagas from './sagas/sagas'
-import rootSaga from './sagas/sagas'
+import RootSaga from './sagas/sagas'
 
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
-
 
 // Create one store that all components can use
 const storeInstance = createStore(
@@ -25,7 +24,7 @@ const storeInstance = createStore(
 );
 
 // Pass rootSaga into our sagaMiddleware
-sagaMiddleware.run(rootSaga);
+sagaMiddleware.run(RootSaga);
 
 ReactDOM.render(<Provider store={storeInstance}><App /></Provider>,
     document.getElementById('root'));
