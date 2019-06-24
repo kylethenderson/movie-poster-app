@@ -1,14 +1,16 @@
-import { put, takeEvery, all } from 'redux-saga/effects';
+import { put, takeEvery} from 'redux-saga/effects';
 import axios from 'axios';
 
+function* rootSaga() {
+    yield movieSaga()
+}
+
 // watches for any action to dispatch and runs that generator
-function* watchAll() {
-    yield all([
-        yield takeEvery('FETCH_MOVIES', fetchMovies),
-        yield takeEvery('UPDATE_MOVIE', updateMovie),
-        yield takeEvery('SELECT_MOVIE', selectMovie),
-        yield takeEvery('DELETE_GENRES', deleteGenres)
-    ]);
+function* movieSaga() {
+    yield takeEvery('FETCH_MOVIES', fetchMovies)
+    yield takeEvery('UPDATE_MOVIE', updateMovie)
+    yield takeEvery('SELECT_MOVIE', selectMovie)
+    yield takeEvery('DELETE_GENRES', deleteGenres)
 }
 
 // generator function to get all the movies from the db
@@ -65,4 +67,4 @@ function* deleteGenres(action) {
     }
 }
 
-export default watchAll;
+export default rootSaga;

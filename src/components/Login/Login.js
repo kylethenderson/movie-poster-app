@@ -16,8 +16,7 @@ class Login extends Component {
     handleLogin = () => {
         if (this.state.username !== '' && this.state.password !== '') {
             this.props.dispatch({
-                type: 'LOGIN',
-                payload: true
+                type: 'LOG_IN'
             })
             // clear stored input once the "logged in" state is set to true
             this.setState({
