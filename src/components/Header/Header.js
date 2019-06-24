@@ -19,7 +19,13 @@ class Header extends Component {
                 {this.props.isLoggedIn ?
                     <Button size="small" id="loginButton" variant="contained" onClick={this.logOut}>Logout</Button>
                     :
-                    <Button size="small" id="loginButton" variant="contained" onClick={this.logIn}>Login</Button>
+                    <>
+                    {this.props.location.pathname === '/login' ?
+                            <Button disabled size="small" id="loginButton" variant="contained" onClick={this.logIn}>Login</Button>
+                            :
+                            <Button size="small" id="loginButton" variant="contained" onClick={this.logIn}>Login</Button>
+                    }
+                    </>
                 }
                 <Button size="small" id="homeButton" variant="contained" onClick={() => { this.props.history.push('/') }}>Home</Button>
             </header>
