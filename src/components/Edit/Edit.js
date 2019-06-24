@@ -18,9 +18,12 @@ class Edit extends Component {
     }
 
     componentDidMount() {
+        // put all the genres into an array of objects
+        // the key being the genre name, and default to true
         const genreArray = this.props.genres.map(genre => {
             return { [genre.name]: true, };
         })
+        // then spread the genre array into a single genreObject
         let genreObject = {};
         genreArray.forEach(object => {
             genreObject = { ...genreObject, ...object }
@@ -44,12 +47,14 @@ class Edit extends Component {
         }
     }
 
+    // update local state based on changes in inputs
     handleChange = (event) => {
         this.setState({
             ...this.state, [event.target.id]: event.target.value
         })
     }
 
+    // on click of one of the checkboxes, update that genre to be true or false
     updateGenres = (event) => {
         this.setState({
             ...this.state,
@@ -58,6 +63,9 @@ class Edit extends Component {
             }
         })
     }
+
+    // on submit, dispatch action with the state, and movie.id
+    // then navigate to /details
     handleSubmit = () => {
         console.log(this.state);
         this.props.dispatch({
@@ -67,6 +75,7 @@ class Edit extends Component {
         this.props.history.push('/details');
     }
 
+    // return to details unharmed
     cancelEdit = () => {
         return this.props.history.push('/details');
     }

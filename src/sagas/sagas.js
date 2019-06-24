@@ -1,6 +1,7 @@
 import { put, takeEvery, all } from 'redux-saga/effects';
 import axios from 'axios';
 
+// watches for any action to dispatch and runs that generator
 function* watchAll() {
     yield all([
         yield takeEvery('FETCH_MOVIES', fetchMovies),
