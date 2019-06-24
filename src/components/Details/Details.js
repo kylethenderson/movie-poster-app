@@ -8,6 +8,7 @@ import './Details.css'
 // Components
 import GenreItem from '../GenreItem/GenreItem'
 
+
 class DetailsView extends Component {
     render() {
         if (this.props.isSelected === false) {
