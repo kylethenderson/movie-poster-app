@@ -4,11 +4,14 @@ import './index.css';
 import App from './components/App/App.js';
 import registerServiceWorker from './registerServiceWorker';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
+
 // Provider allows us to use redux within our react app
 import { Provider } from 'react-redux';
 import logger from 'redux-logger';
+
 // Import saga middleware
 import createSagaMiddleware from 'redux-saga';
+
 // import reducers and sagas
 import Reducers from './reducers/reducers'
 import RootSaga from './sagas/sagas'
