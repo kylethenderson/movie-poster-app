@@ -109,7 +109,7 @@ const selectedMovie = (state = selectedMovieStart, action) => {
 }
 
 // reducer to store the movie genres
-const genres = (state = [{ name: '' }], action) => {
+const genres = (state = [], action) => {
     switch (action.type) {
         case 'SET_TAGS':
             return action.payload;

@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import Grid from '@material-ui/core/Grid'
-// import Paper from '@material-ui/core/Paper'
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button'
@@ -19,30 +18,28 @@ class Edit extends Component {
     }
 
     componentDidMount() {
-        console.log('EDIT PAGE MOUNTED');
         const genreArray = this.props.genres.map(genre => {
             return { [genre.name]: true, };
         })
-        console.log(genreArray);
         let genreObject = {};
         genreArray.forEach(object => {
-            console.log(object)
             genreObject = { ...genreObject, ...object }
         })
-        console.log(genreObject);
-        // if (this.props.movies[0].title !== '') {
-        //     console.log('setting edit page state');
-        //     this.setState({
-        //         title: this.props.movies[this.props.movieId-1].title,
-        //         description: this.props.movies[this.props.movieId-1].description,
-        //     })
-        // }
-        if (this.props.genres[0].name !== '') {
+
+        // if the movie has genres, set all properties in state
+        if (this.props.genres[0] !== undefined) {
             this.setState({
                 title: this.props.movies[this.props.movieId - 1].title,
                 description: this.props.movies[this.props.movieId - 1].description,
                 haveGenres: true,
                 genreObject: genreObject,
+            })
+        }
+        // if the movie does NOT have genres, only set the state of title and description 
+        else {
+            this.setState({
+                title: this.props.movies[this.props.movieId - 1].title,
+                description: this.props.movies[this.props.movieId - 1].description,
             })
         }
     }
@@ -109,32 +106,36 @@ class Edit extends Component {
                                     />
                                 </FormControl>
                             </Grid>
-                            <Grid item xs={12}>
-                                <h4>Remove Tagged Genres</h4>
-                                {this.state.haveGenres ?
-                                    <>
-                                        {this.props.genres.map(genre => 
-                                            <FormControlLabel
-                                                key={genre.name}
-                                                control={
-                                                    <Checkbox 
-                                                        checked={this.state.genreObject[genre.name]} 
-                                                        onChange={this.updateGenres} 
-                                                        value={genre.name}
-                                                        id={genre.name} 
-                                                        key={genre.name} 
-                                                    />
-                                                        
-                                                }
-                                                label={genre.name}
-                                            />
-                                            
-                                        )}
-                                    </>
-                                    :
-                                    <></>
-                                }
-                            </Grid>
+                            {this.props.genres[0] ?
+                                <Grid item xs={12}>
+                                    <h4>Remove Tagged Genres</h4>
+                                    {this.state.haveGenres ?
+                                        <>
+                                            {this.props.genres.map(genre =>
+                                                <FormControlLabel
+                                                    key={genre.name}
+                                                    control={
+                                                        <Checkbox
+                                                            checked={this.state.genreObject[genre.name]}
+                                                            onChange={this.updateGenres}
+                                                            value={genre.name}
+                                                            id={genre.name}
+                                                            key={genre.name}
+                                                        />
+
+                                                    }
+                                                    label={genre.name}
+                                                />
+
+                                            )}
+                                        </>
+                                        :
+                                        <></>
+                                    }
+                                </Grid>
+                                :
+                                <></>
+                            }
 
                             <Grid item xs={4}>
                                 <Button fullWidth variant="contained" onClick={this.cancelEdit}>Cancel</Button>
