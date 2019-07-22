@@ -12,6 +12,8 @@ to remove genres tagged for that movie.
 
 ## SETUP
 
+Follow the instructions below to run the project locally.
+
 Install all dependencies for the project.
 
 ```
@@ -34,6 +36,6 @@ For full functionality, you will need to create a local database and tables usin
 
 ## Authors:
 
-Prime Academy - Base application and server file setup
-
 Kyle Henderson - Frontend UI, server routing, and database queries
+
+Prime Academy - Base application and server file setup
